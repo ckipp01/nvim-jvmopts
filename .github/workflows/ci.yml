@@ -1,0 +1,62 @@
+name: jvmopts ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: ~
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v2
+
+    - name: Setup luacheck
+      run: |
+        sudo apt update &&
+        sudo apt install -y lua5.1 luarocks &&
+        sudo luarocks install luacheck
+
+    - name: Run luacheck
+      run: |
+        make lint
+
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup StyLua
+      run: |
+        cargo install --version 0.9.3 stylua
+
+    - name: Run StyLua
+      run: |
+        make format-check
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: date +%F > todays-date
+      - name: Restore cache for today's nightly.
+        uses: actions/cache@v2
+        with:
+          path: _neovim
+          key: ${{ runner.os }}-x64-${{ hashFiles('todays-date') }}
+
+      - name: Prepare plenary
+        run: |
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim ~/.local/share/nvim/site/pack/vendor/start/plenary.nvim
+          ln -s $(pwd) ~/.local/share/nvim/site/pack/vendor/start
+      - name: Run tests
+        run: |
+          curl -OL https://raw.githubusercontent.com/norcalli/bot-ci/master/scripts/github-actions-setup.sh
+          source github-actions-setup.sh nightly-x64
+          make setup-env
+          make test
+
