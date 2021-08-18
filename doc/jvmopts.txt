@@ -1,6 +1,6 @@
 *nvim-jvmopts.txt*
 
-A small micro-libraryto help gather JVM options from various places.
+A small micro-library to help gather JVM options from various places.
 
                             NVIM-JVMOPTS REFERENCE MANUAL
 
@@ -15,7 +15,7 @@ INTRO                                                       *nvim-jvmopts-intro*
 nvim-jvmopts is useful if you need to gather JVM options from various places
 to pass into some type of Java process. For example you may need to grab the
 `JAVA_OPTS` env variable or check the .jvmopts file for a specific directory.
-nvim-jvmopts just provides a handful of helper functions to do these varios
+nvim-jvmopts just provides a handful of helper functions to do these various
 tasks for you.
 ================================================================================
 API                                                           *nvim-jvmopts-api*
