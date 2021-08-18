@@ -2,7 +2,7 @@ format:
 	stylua lua/ tests/*.lua
 
 format-check:
-	stylua --check lua/ tests*.lua
+	stylua --check lua/ tests/*.lua
 
 lint:
 	luacheck lua/ tests/*.lua
