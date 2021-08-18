@@ -80,9 +80,9 @@ local function java_opts(workspace)
 end
 
 return {
-  java_opts_from_env = java_opts_from_env,
-  java_flags_from_env = java_flags_from_env,
-  java_opts_from_file = java_opts_from_file,
   java_env = java_env,
+  java_flags_from_env = java_flags_from_env,
   java_opts = java_opts,
+  java_opts_from_env = java_opts_from_env,
+  java_opts_from_file = java_opts_from_file,
 }

@@ -1,0 +1,70 @@
+*nvim-jvmopts.txt*
+
+A small micro-libraryto help gather JVM options from various places.
+
+                            NVIM-JVMOPTS REFERENCE MANUAL
+
+CONTENTS                                                          *nvim-jvmopts*
+
+    1. Intro........................ |nvim-jvmopts-intro|
+    2. API.......................... |nvim-jvmopts-api|
+
+================================================================================
+INTRO                                                       *nvim-jvmopts-intro*
+
+nvim-jvmopts is useful if you need to gather JVM options from various places
+to pass into some type of Java process. For example you may need to grab the
+`JAVA_OPTS` env variable or check the .jvmopts file for a specific directory.
+nvim-jvmopts just provides a handful of helper functions to do these varios
+tasks for you.
+================================================================================
+API                                                           *nvim-jvmopts-api*
+
+
+                                                                    *java_env()*
+java_env()                  Gathers the options from both the `JAVA_OPTS` and
+                            `JAVA_FLAGS` env variables.
+
+                            Return:
+                              Table of options, empty table if none
+
+                                                         *java_flags_from_env()*
+java_flags_from_env()       Gathers the Java options (if any) from the
+                            `JAVA_FLAGS` env variable.
+
+                            Return:
+                              Table of options, empty table if none
+
+                                                                   *java_opts()*
+java_opts({workspace})      Gathers the Java options (if any) from all of the
+                            places it knows about. From the `JAVA_FLAGS` and
+                            `JAVA_OPTS` env variables and it also checks the
+                            given workspace for a .jvmopts file.
+
+                            Parameters:
+                              {workspace} Workspce to look in for
+                              the .jvmopts file.
+
+                            Return:
+                              Table of options, empty table if nonek
+
+                                                          *java_opts_from_env()*
+java_opts_from_env()        Gathers the Java options (if any) from the
+                            `JAVA_OPTS` env variable.
+
+                            Return:
+                              Table of options, empty table if none
+
+                                                         *java_opts_from_file()*
+java_opts_from_file({workspace})
+                             Gathers the Java options (if any) from the
+                            .jvmopts file of the given workspace.
+
+                            Parameters:
+                              {workspace} Workspce to look in for
+                              the .jvmopts file.
+
+                            Return:
+                              Table of options, empty table if none
+
+vim:tw=80:ts=2:ft=help:
