@@ -29,7 +29,11 @@ end
 
 local function merge_lists(a, b)
   if b == nil then
-    return {}
+    if a == nil then
+      return {}
+    else
+      return a
+    end
   else
     local merged = vim.deepcopy(a)
 
